@@ -1,0 +1,222 @@
+{
+  "id": "mike-onboarding",
+  "title": "Mike Codebase Tour",
+  "description": "Guided walkthrough of the Mike project: a Next.js frontend and Express backend for document processing, chat, and workflow automation.",
+  "version": "1.0.0",
+  "audience": "New Developers",
+  "prerequisites": [
+    "Familiarity with TypeScript, Next.js, and Express",
+    "Basic knowledge of Supabase"
+  ],
+  "steps": [
+    {
+      "id": "step-1-overview",
+      "title": "Project Overview",
+      "description": "Welcome to Mike! This monorepo contains a Next.js frontend and an Express backend that work together to deliver document processing, chat, and workflow features. Backend talks to Supabase (Auth + Postgres) and S3-compatible object storage.",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-2-top-level-layout",
+      "title": "Top-Level Layout",
+      "description": "Two main workspaces sit side by side: an Express backend with database migrations, and a Next.js frontend. Each is independently installable, built, and deployed.",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "highlightLayers": [
+        {
+          "id": "workspaces",
+          "name": "Workspaces",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "backend", "type": "directory" },
+            { "path": "frontend", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "docs",
+          "name": "Docs & License",
+          "color": "#94a3b8",
+          "items": [
+            { "path": "README.md", "type": "file" },
+            { "path": "LICENSE", "type": "file" }
+          ],
+          "opacity": 0.5,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-3-backend-routes",
+      "title": "Backend API Routes",
+      "description": "The Express API is organized by feature area, with one route module per surface: chat, documents, downloads, projects, project chat, tabular data, user, and workflows. The server entry point wires them all together.",
+      "estimatedTime": 90,
+      "focusDirectory": "backend/src",
+      "highlightLayers": [
+        {
+          "id": "routes",
+          "name": "API Routes",
+          "color": "#10b981",
+          "items": [
+            { "path": "backend/src/routes", "type": "directory" },
+            { "path": "backend/src/index.ts", "type": "file" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-4-backend-lib",
+      "title": "Backend Library Code",
+      "description": "Shared backend logic covers Supabase access, object storage, document conversion, LLM wiring, workflows, and download tokens. Authentication middleware sits alongside the library and gates protected routes.",
+      "estimatedTime": 120,
+      "focusDirectory": "backend/src",
+      "highlightLayers": [
+        {
+          "id": "lib",
+          "name": "Shared Library",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "backend/src/lib", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "middleware",
+          "name": "Middleware",
+          "color": "#ef4444",
+          "items": [
+            { "path": "backend/src/middleware", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-5-database-schema",
+      "title": "Database Schema",
+      "description": "A single one-shot migration defines the canonical Postgres schema. Run it once in the Supabase SQL editor to bring a fresh database fully up to date.",
+      "estimatedTime": 60,
+      "focusDirectory": "backend",
+      "highlightLayers": [
+        {
+          "id": "migrations",
+          "name": "Migrations",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "backend/migrations", "type": "directory" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-6-frontend-app",
+      "title": "Frontend App Router",
+      "description": "The Next.js app uses the App Router. Authenticated pages are grouped together, with separate login and signup flows. The root layout, global styles, and error boundaries wrap every route.",
+      "estimatedTime": 90,
+      "focusDirectory": "frontend/src",
+      "highlightLayers": [
+        {
+          "id": "app-router",
+          "name": "App Router",
+          "color": "#06b6d4",
+          "items": [
+            { "path": "frontend/src/app", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-7-frontend-components",
+      "title": "Frontend Components & Lib",
+      "description": "Reusable UI is split between chat features, low-level UI primitives, and shared providers. Cross-cutting helpers — auth, Supabase clients, shared types, and file conversion — sit in the frontend library alongside React contexts.",
+      "estimatedTime": 90,
+      "focusDirectory": "frontend/src",
+      "highlightLayers": [
+        {
+          "id": "components",
+          "name": "Components",
+          "color": "#ec4899",
+          "items": [
+            { "path": "frontend/src/components", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "lib",
+          "name": "Frontend Lib",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "frontend/src/lib", "type": "directory" },
+            { "path": "frontend/src/contexts", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-8-configuration",
+      "title": "Configuration & Tooling",
+      "description": "Each workspace owns its own build, lint, and deploy configuration. The frontend layers Next.js and OpenNext on top of the standard TypeScript and ESLint setup, while the backend uses Nixpacks for deployment.",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "highlightLayers": [
+        {
+          "id": "configs",
+          "name": "Config Files",
+          "color": "#a855f7",
+          "items": [
+            { "path": "backend/package.json", "type": "file" },
+            { "path": "backend/tsconfig.json", "type": "file" },
+            { "path": "backend/nixpacks.toml", "type": "file" },
+            { "path": "frontend/package.json", "type": "file" },
+            { "path": "frontend/tsconfig.json", "type": "file" },
+            { "path": "frontend/next.config.ts", "type": "file" },
+            { "path": "frontend/open-next.config.ts", "type": "file" },
+            { "path": "frontend/eslint.config.mjs", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "border"
+        }
+      ],
+      "colorMode": "fileTypes"
+    },
+    {
+      "id": "step-9-next-steps",
+      "title": "Next Steps",
+      "description": "Install dependencies in both workspaces, copy the example environment files, apply the database schema, then start the backend and frontend dev servers. The project README has the full setup checklist and required services.",
+      "estimatedTime": 60,
+      "focusDirectory": "",
+      "resources": [
+        {
+          "title": "Project README",
+          "url": "README.md",
+          "type": "documentation"
+        }
+      ],
+      "colorMode": "fileTypes"
+    }
+  ],
+  "metadata": {
+    "author": "Mike Flannery",
+    "createdAt": "2026-05-01T00:00:00.000Z",
+    "tags": ["onboarding", "fullstack", "nextjs", "express", "supabase"]
+  }
+}
